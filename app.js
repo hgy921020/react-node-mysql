@@ -81,4 +81,38 @@ app.get('/check',(req,res)=>{
             })
     })
 })
+
+app.get('/edit',(req,res)=>{
+    console.log(req.query.id+''+req.query.content);
+    let {id,content} = req.query;
+    let updateEdit =`update todo_table set content="${content}" where id=${id}`
+    mycont.query(updateEdit,(err,result)=>{
+        if(err){
+            res.send({
+                code:0,
+                msg:'编辑失败'
+            })
+        }
+            res.send({
+                code:1,
+                msg:'编辑成功'
+            })
+    })
+    // res.send('接口调用成功')
+
+    // let updateEdit = `update todo_table set content=${content} where id=${id}`;
+    // mycont.query(updateEdit,(err,result)=>{
+    //     if(err){
+    //         res.send({
+    //             code:0,
+    //             msg:'编辑失败'
+    //         })
+    //         return false
+    //     }
+    //         res.send({
+    //             code:1,
+    //             msg:'编辑成功'
+    //         })
+    // })
+})
 app.listen(8000);
